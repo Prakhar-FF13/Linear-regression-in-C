@@ -55,6 +55,6 @@ int main(){
 	char **data = read_csv("kc_house_data.csv");
 	int i;
 	for(i =0  ; i < 10 ; i++)
-		printf("%s", data[i]);
+		printf("%s\n", data[i]);
 	return 0;
 }
