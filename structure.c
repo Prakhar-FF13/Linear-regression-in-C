@@ -1,21 +1,27 @@
-char *cols[15] = {"id", "crim", "zn", "indus", "chas", "nox", "rm", "age", "dis",
-				 "rad", "tax", "ptratio", "black", "lstat", "medv"};
+char *cols[21] = {"id", "date", "price", "bedrooms", "bathrooms", "sqft_living", "sqft_lot", "floors", "waterfront",
+				 "view", "view", "condition", "grade", "sqft_above", "sqft_basement", "year_built", "year_renovated",
+				 "zipcode", "latitude", "longitude", "sqft_living15"};
 
 
 typedef struct Row{
-	int id; // The Number of datapoint.
-	double crim; // Per Capita Crime Rate by town.
-	double zn;  // proportion of residential land zoned for lots over 25,000 sq.ft.
-	double indus; // proportion of non-retail business acres per town.
-	double chas; // Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
-	double nox; // nitrogen oxides concentration (parts per 10 million).
-	double rm; // average number of rooms per dwelling.
-	double age; // proportion of owner-occupied units built prior to 1940.
-	double dis; // weighted mean of distances to five Boston employment centres.
-	int rad; // index of accessibility to radial highways.
-	int tax; // full-value property-tax rate per $10,000.
-	double ptratio; // pupil-teacher ratio by town.
-	double black; // 1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town.
-	double lstat; // lower status of the population (percent).
-	double medv; // median value of owner-occupied homes in $1000s.
+	long long id; // The Number of datapoint.
+	char *date; // Date the house was sold.
+	long long price; // Price of the house.
+	int bedrooms; // Number of bedrooms.
+	int bathrooms; // Number of bathrooms.
+	int sqft_living; // Square footage of the home. (Area of house).
+	int sqft_lot; // Square footage of the lot.
+	float floors; // Number of floors.
+	int waterfront; // House has a waterfront or not.
+	int view; // Number of times the house has been viewed.
+	int condition; // On a scale of 5.
+	int grade; // Overall grade given by king county housing unit.
+	int sqft_above; // Square footage of the house above the basement.
+	int sqft_basement; // Sqaure footage of the basement.
+	int year_built; // Year in which the house was built.
+	int year_renovated; 
+	int zipcode; // Zipcode of the area where the house is located.
+	double latitude; // Latitude coordinates.
+	double longtitude; // Longitude coordinates.
+	int sqft_living15; // Sqft after renovation.
 }row; 
