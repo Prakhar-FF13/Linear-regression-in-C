@@ -4,14 +4,14 @@ char *cols[21] = {"id", "date", "price", "bedrooms", "bathrooms", "sqft_living",
 
 
 typedef struct Row{
-	long long id; // The Number of datapoint.
+	char *id; // The Number of datapoint.
 	char *date; // Date the house was sold.
 	long long price; // Price of the house.
 	int bedrooms; // Number of bedrooms.
 	int bathrooms; // Number of bathrooms.
 	int sqft_living; // Square footage of the home. (Area of house).
 	int sqft_lot; // Square footage of the lot.
-	float floors; // Number of floors.
+	double floors; // Number of floors.
 	int waterfront; // House has a waterfront or not.
 	int view; // Number of times the house has been viewed.
 	int condition; // On a scale of 5.
@@ -24,4 +24,5 @@ typedef struct Row{
 	double latitude; // Latitude coordinates.
 	double longtitude; // Longitude coordinates.
 	int sqft_living15; // Sqft after renovation.
+	int sqft_lot15; // Sqft of lot after renovation.
 }row; 
