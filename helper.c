@@ -1,3 +1,5 @@
+#include "conversion.c"
+// This function splits the string at every delimiter and returns the parts of string in an array of strings.
 char** split(char *str, char delimiter){
 	char **parts = malloc(30 * sizeof(char *));
 	char temp[30][30];
@@ -20,17 +22,35 @@ char** split(char *str, char delimiter){
 	}
 	return parts;
 }
+
+// this function generates structure variable from the tokens in string.
 row fillValues(char **token){
 	row r;
+	int i;
+	r.id = token[0]; 						r.date = token[1]; 							r.price = getLong(token[2]);
+	r.bedrooms = getInt(token[3]);			r.bathrooms = getInt(token[4]);				r.sqft_living = getInt(token[5]);
+	r.sqft_lot = getInt(token[6]);			r.floors = getDouble(token[7]);				r.waterfront = getInt(token[8]);
+	r.view = getInt(token[9]);				r.condition = getInt(token[10]);			r.grade = getInt(token[11]);
+	r.sqft_above = getInt(token[12]);		r.sqft_basement = getInt(token[13]);		r.year_built = getInt(token[14]);
+	r.year_renovated = getInt(token[15]);	r.zipcode = getInt(token[16]);				r.latitude = getDouble(token[17]);
+	r.longtitude = getDouble(token[18]);	r.sqft_living15 = getInt(token[19]);		r.sqft_lot15 = getInt(token[20]);
 	return r;
 }
 
-
+// Converts the input string into structure variable defined in structure.c
 row parseString(char *str){
+	// Generates tokens.
 	char **token = split(str, ',');
 	int i = 0;
-	/*for(i =0  ;i  < 21 ; i++)
-		printf("%s\n", token[i]);*/
-	return (fillValues(token));
+	row r = fillValues(token);
+	return (r);
+}
+
+//Prints a row of the dataset..
+void printRow(row r){
+	printf("%15s | %15s | %15ld | %15d | %15d | %15d |% 15d | %15f | %15d | %15d | %15d | %15d | %15d | %15d | %15d | %15d | %15d | %15f | %15f | %15\n",
+	r.id, r.date, r.price, r.bedrooms, r.bathrooms, r.sqft_living, r.sqft_lot, r.floors, r.waterfront,
+	r.view, r.condition, r.grade, r.sqft_above, r.sqft_basement, r.year_built, r.year_renovated, r.zipcode,
+	r.latitude, r.longtitude, r.sqft_living15, r.sqft_lot15);
 }
 
