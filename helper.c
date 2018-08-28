@@ -48,9 +48,22 @@ row parseString(char *str){
 
 //Prints a row of the dataset..
 void printRow(row r){
-	printf("%15s | %15s | %15ld | %15d | %15d | %15d |% 15d | %15f | %15d | %15d | %15d | %15d | %15d | %15d | %15d | %15d | %15d | %15f | %15f | %15\n",
+	printf("%15s | %15s | %15ld | %15ld | %15ld | %15ld |% 15ld | %15f | %15ld | %15ld | %15ld | %15ld | %15ld | %15ld | %15ld | %15ld | %15ld | %15lf | %15lf | %15ld | %15ld\n",
 	r.id, r.date, r.price, r.bedrooms, r.bathrooms, r.sqft_living, r.sqft_lot, r.floors, r.waterfront,
 	r.view, r.condition, r.grade, r.sqft_above, r.sqft_basement, r.year_built, r.year_renovated, r.zipcode,
 	r.latitude, r.longtitude, r.sqft_living15, r.sqft_lot15);
+}
+
+// Prints some rows of the dataset.
+void printDataset(row *r, int num_of_points){
+	int i = 0;
+	for(i = 0  ; i < 21 ; i++)
+		printf("%15s | ", cols[i]);
+	printf("\n");
+	for(i = 0 ; i < 21 ; i++)
+		printf("------------------");
+	printf("\n");
+	for(i = 0 ; i < num_of_points ; i++)
+		printRow(r[i]);
 }
 
