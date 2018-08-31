@@ -50,6 +50,6 @@ row* read_csv(char *str){
 
 int main(){
 	row *r = read_csv("kc_house_data.csv");
-	printDataset(r, 100);
+	printDataset(r, 10);
 	return 0;
 }
