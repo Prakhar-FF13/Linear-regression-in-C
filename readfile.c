@@ -47,9 +47,3 @@ row* read_csv(char *str){
 	
 	return r;
 }
-
-int main(){
-	row *r = read_csv("kc_house_data.csv");
-	printDataset(r, 10);
-	return 0;
-}

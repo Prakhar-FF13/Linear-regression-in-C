@@ -1,7 +1,3 @@
-char *cols[21] = {"id", "date", "price", "bedrooms", "bathrooms", "sqft_living", "sqft_lot", "floors", "waterfront",
-				 "view", "condition", "grade", "sqft_above", "sqft_basement", "year_built", "year_renovated",
-				 "zipcode", "latitude", "longitude", "sqft_living15", "sqft_lot15"};
-
 typedef struct Row{
 	char *id; // The Number of datapoint.
 	char *date; // Date the house was sold.

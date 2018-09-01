@@ -56,6 +56,9 @@ void printRow(row r){
 
 // Prints some rows of the dataset.
 void printDataset(row *r, int num_of_points){
+	char *cols[21] = {"id", "date", "price", "bedrooms", "bathrooms", "sqft_living", "sqft_lot", "floors", "waterfront",
+				 "view", "condition", "grade", "sqft_above", "sqft_basement", "year_built", "year_renovated",
+				 "zipcode", "latitude", "longitude", "sqft_living15", "sqft_lot15"};
 	int i = 0;
 	for(i = 0  ; i < 21 ; i++)
 		printf("%15s | ", cols[i]);
