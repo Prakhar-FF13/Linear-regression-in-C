@@ -1,6 +1,4 @@
 // Here we will select the important Features and remove features like Date, Id etc. which are not important for our study.
-#include "readfile.c"
-#include "vect_operations.c"
 
 /*
 Important Features which we will keep ->
@@ -59,8 +57,4 @@ double **init(){
 	printf("Time taken to remove features and convert the Dataset : %lf ms\n\n", timespent);
 	return mat;
 }
-int main(){
-	double **mat = init();
-	printMatrix(mat, 10);
-	return 0;
-}
+
