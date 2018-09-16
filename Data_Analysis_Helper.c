@@ -1,3 +1,4 @@
+// Merge Sort Helper.
 void sort_merge(double *arr, int low, int mid, int high){
 	int l = mid - low + 1;
 	int r = high - mid;
@@ -23,7 +24,7 @@ void sort_merge(double *arr, int low, int mid, int high){
 	free(left);
 	free(right);
 }
-
+// Sorts the array (Mergse Sort)
 void sort(double *arr, int low, int high){
 	if(low < high){
 		int mid = (low + high)/2;
@@ -32,7 +33,7 @@ void sort(double *arr, int low, int high){
 		sort_merge(arr, low, mid, high);
 	}
 }
-
+//prints percentage of points greater than percentile value ...
 void percentileValue(double *arr, double percentile, int len){
 	int i, index;
 	double x;
@@ -45,3 +46,25 @@ void percentileValue(double *arr, double percentile, int len){
 	printf("%.1lf%% of values are greater than : %.1lf\n", 100 - percentile, tarr[index]);
 	free(tarr);
 }
+// Returns the target variabe as an array..
+double* returnTarget(double **mat, int colnum, int rows){
+	int i;
+	double *y = malloc(rows * sizeof(double));
+	for(i = 0 ; i < rows ; i++)
+		y[i] = mat[i][colnum];
+		
+	return y;
+}
+// Returns the feature matrix ecluding target variable (it assumes last column is target variable )..
+double** returnFeatures(double **mat, int rows){
+	int i, j;
+	double **newmat = malloc(rows * sizeof(double *));
+	for(i = 0 ; i < rows ; i++){
+		newmat[i] = malloc(6 * sizeof(double));
+		for(j = 0 ; j < 6 ; j++)
+			newmat[i][j] = mat[i][j];
+		free(mat[i]);
+	}
+	free(mat);
+	return newmat;
+} 
