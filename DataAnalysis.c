@@ -94,15 +94,14 @@ double **findAndRemoveOutliers(double **mat){
 }
 // Performs outlier removal and train-test split ...
 void performOperations(double **X_train, double *y_train, double **X_test, double *y_test, int trainpts, int testpts){
+	int i,j;
 	double **mat = init();
 	printMatrix(mat, 10);
 	mat = findAndRemoveOutliers(mat);
 	printMatrix(mat, 10);
 	int newlen = 19806;
+	printf("\n--------------------------------------------------\nTrain Test Splitting \n");
 	double *y = returnTarget(mat, 6, newlen);
-	int i,j;
-	/*for(i = 0 ; i < 20 ; i++)
-		printf("%lf\n", y[i]);*/
 	mat = returnFeatures(mat, newlen);
 	for(i = 0 ; i < trainpts ; i++){
 		X_train[i] = malloc(6 * sizeof(double));
@@ -127,26 +126,12 @@ void performOperations(double **X_train, double *y_train, double **X_test, doubl
 
 int main(){
 	double **X_train = malloc(10000 * sizeof(double *));
-	double **X_test = malloc(10000 * sizeof(double *));
-	double *y_train = malloc(5000 * sizeof(double));
+	double **X_test = malloc(5000 * sizeof(double *));
+	double *y_train = malloc(10000 * sizeof(double));
 	double *y_test = malloc(5000 * sizeof(double));
 	performOperations(X_train, y_train, X_test, y_test, 10000, 5000);
 	int i,j;
-	printf("\n--------------------------------------------------\n");
 	printf("\nThe size of Train Set : (%d, %d)\n", 10000, 6);
-	for(i = 0 ; i < 2; i++){
-		for(j = 0 ; j < 6 ; j++)
-			printf("%lf | ", X_train[i][j]);
-		printf("\n");
-	}
-	
 	printf("\nThe size of Test Set : (%d, %d)\n", 5000, 6);
-	for(i = 0 ; i < 2; i++){
-		for(j = 0 ; j < 6 ; j++)
-			printf("%lf | ", X_test[i][j]);
-		printf("\n");
-	}
-
-	
 	return 0;
 }
