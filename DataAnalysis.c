@@ -1,8 +1,3 @@
-#include "readfile.c"
-#include "vect_operations.c"
-#include "vector.c"
-#include "Data_Analysis_Helper.c"
-
 // Finds Outlier using Percentile values...
 void findOutliers(double **mat){
 	int i, j, k, len = 21610;
@@ -93,13 +88,22 @@ double **findAndRemoveOutliers(double **mat){
 	return newmat;
 }
 // Performs outlier removal and train-test split ...
+double fimin[6], fimax[6];
 void performOperations(double **X_train, double *y_train, double **X_test, double *y_test, int trainpts, int testpts){
 	int i,j;
 	double **mat = init();
 	printMatrix(mat, 10);
 	mat = findAndRemoveOutliers(mat);
-	printMatrix(mat, 10);
 	int newlen = 19806;
+	printf("\n-------------------------------\nMin-Max Scaling\n\n");
+	for(j = 0 ; j <= 6 ; j++){
+		double x = minValue(mat, j);
+		double y = maxValue(mat, j);
+		fimin[j] = x; fimax[j] = y;
+		for(i = 0 ;  i < newlen ; i++)
+			mat[i][j] = (mat[i][j] - x)*1.0/(y-x);
+	}
+	printMatrix(mat, 10);
 	printf("\n--------------------------------------------------\nTrain Test Splitting \n");
 	double *y = returnTarget(mat, 6, newlen);
 	mat = returnFeatures(mat, newlen);
@@ -122,16 +126,5 @@ void performOperations(double **X_train, double *y_train, double **X_test, doubl
 		
 	free(mat);
 	free(y);
-}
-
-int main(){
-	double **X_train = malloc(10000 * sizeof(double *));
-	double **X_test = malloc(5000 * sizeof(double *));
-	double *y_train = malloc(10000 * sizeof(double));
-	double *y_test = malloc(5000 * sizeof(double));
-	performOperations(X_train, y_train, X_test, y_test, 10000, 5000);
-	int i,j;
-	printf("\nThe size of Train Set : (%d, %d)\n", 10000, 6);
-	printf("\nThe size of Test Set : (%d, %d)\n", 5000, 6);
-	return 0;
+	
 }

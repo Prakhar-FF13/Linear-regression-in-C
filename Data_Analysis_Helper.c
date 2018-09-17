@@ -68,3 +68,23 @@ double** returnFeatures(double **mat, int rows){
 	free(mat);
 	return newmat;
 } 
+// Returns minimum value in a column..
+double minValue(double **arr, int colnum){
+	double mine = 1e7;
+	int i;
+	for(i =  0 ; i < 19806 ; i++)
+		if(arr[i][colnum] < mine)
+			mine = arr[i][colnum];
+			
+	return mine;
+}
+//Returns maximum value in a column..
+double maxValue(double **arr, int colnum){
+	double maxe = -1;
+	int i;
+	for(i =  0 ; i < 19806 ; i++)
+		if(arr[i][colnum] > maxe)
+			maxe = arr[i][colnum];
+			
+	return maxe;
+}
