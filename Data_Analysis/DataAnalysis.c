@@ -89,12 +89,9 @@ double **findAndRemoveOutliers(double **mat){
 }
 // Performs outlier removal and train-test split ...
 double fimin[6], fimax[6];
-void performOperations(double **X_train, double *y_train, double **X_test, double *y_test, int trainpts, int testpts){
+
+void MinMaxScaling(double **mat, int newlen){
 	int i,j;
-	double **mat = init();
-	printMatrix(mat, 10);
-	mat = findAndRemoveOutliers(mat);
-	int newlen = 19806;
 	printf("\n-------------------------------\nMin-Max Scaling\n\n");
 	for(j = 0 ; j <= 6 ; j++){
 		double x = minValue(mat, j);
@@ -103,7 +100,10 @@ void performOperations(double **X_train, double *y_train, double **X_test, doubl
 		for(i = 0 ;  i < newlen ; i++)
 			mat[i][j] = (mat[i][j] - x)*1.0/(y-x);
 	}
-	printMatrix(mat, 10);
+}
+
+void train_test_split(double **X_train, double *y_train, double **X_test, double *y_test, int trainpts, int testpts, double **mat, int newlen){
+	int i,j;
 	printf("\n--------------------------------------------------\nTrain Test Splitting \n");
 	double *y = returnTarget(mat, 6, newlen);
 	mat = returnFeatures(mat, newlen);

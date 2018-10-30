@@ -40,9 +40,7 @@ void printMatrix(double **mat, int n){
 }
 
 // Uses read_csv function and converts the read csv file to double array for vector operations.
-double **init(){
-	row *r = read_csv("kc_house_data.csv");
-	printDataset(r, 10);
+double **init(row *r){
 	printf("\n\n\nNow we will Convert the dataset to array for manipulation.\nWe will also remove unnecessary features\n\n");
 	double timespent = 0.0;
 	clock_t start = clock();

@@ -12,20 +12,43 @@
 #include "Training_Models/LinearRegression.c"
 
 int main(){
+	// Read Data (readfile.c).
+	row *r = read_csv("kc_house_data.csv");
+	printDataset(r, 10);
+	
+
+	// Structure to Matrix Conversion (vector.c).
+	double **mat = init(r);
+	printMatrix(mat, 10);
+	
+
+	// Find and remove outliers (dataanalysis.c).
+	mat = findAndRemoveOutliers(mat);
+	int newlen = 19806;
+	
+
+	//MinMax Scaling.. (dataanalysis.c)
+	MinMaxScaling(mat, newlen);
+	printMatrix(mat, 10);
+
+
+	// Train Test Split (dataanalysis.c)
 	double **X_train = malloc(10000 * sizeof(double *));
 	double **X_test = malloc(5000 * sizeof(double *));
 	double *y_train = malloc(10000 * sizeof(double));
 	double *y_test = malloc(5000 * sizeof(double));
+	
 	// Below function is defined in Data Analysis.c file and handles reading data and conversion of data into matrix form.
-	performOperations(X_train, y_train, X_test, y_test, 10000, 5000);
-	int i,j;
+	train_test_split(X_train, y_train, X_test, y_test, 10000, 5000, mat, newlen);
 	printf("\nThe size of Train Set : (%d, %d)\n", 10000, 6);
 	printf("\nThe size of Test Set : (%d, %d)\n", 5000, 6);
 	double alpha[11] = {0.5, 0.4, 0.3, 0.2, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001, 0.0000001};
 	printf("\n\n ---------------- Training Regression Models ---------------------- \n\n");
-	printf("------------- Linear Regression-------------\n");
+	printf("------------- Multiple Regression-------------\n");
 	double *w_best;
 	double maxerr = 1e7;
+	int i,j;
+	printf("------------- HyperParameter Tuning--------------\n");
 	for(i = 0 ; i < 11 ; i++){
 		// Below functions are defined in Linear Regression.c file and trains the model, predicts values and calculates error
 		double *w = LinearRegression(X_train, y_train, alpha[i]);
@@ -44,5 +67,6 @@ int main(){
 	printf("Feature Coefficient of Best Model :\n");
 	for(i = 1 ; i < 7 ; i++)
 		printf("Feature %d has coefficient :  %.6lf\n", i, w_best[i]);
+	return 0;
 	return 0;
 }
