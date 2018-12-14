@@ -46,7 +46,7 @@ double* LinearRegression(double** X_train, double* y_train, double alpha){
 	double *w = malloc(7 * sizeof(double));
 	initializeWeights(w);
 	int i,j;
-	for(i = 0 ; i < 5000 ; i++){
+	for(i = 0 ; i < 2000 ; i++){
 		double *y_pred = predict(X_train, w);
 		double *err = errors(y_train, y_pred);
 		double *grad = gradient(X_train, err);

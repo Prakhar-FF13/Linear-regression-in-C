@@ -9,6 +9,7 @@
 #include "Data_Analysis/vector.c"
 #include "Data_Analysis/Data_Analysis_Helper.c"
 #include "Data_Analysis/DataAnalysis.c"
+#include "Training_Models/RandomModel.c"
 #include "Training_Models/LinearRegression.c"
 
 int main(){
@@ -37,26 +38,31 @@ int main(){
 	double **X_test = malloc(5000 * sizeof(double *));
 	double *y_train = malloc(10000 * sizeof(double));
 	double *y_test = malloc(5000 * sizeof(double));
-	
-	// Below function is defined in Data Analysis.c file and handles reading data and conversion of data into matrix form.
 	train_test_split(X_train, y_train, X_test, y_test, 10000, 5000, mat, newlen);
 	printf("\nThe size of Train Set : (%d, %d)\n", 10000, 6);
 	printf("\nThe size of Test Set : (%d, %d)\n", 5000, 6);
-	double alpha[11] = {0.5, 0.4, 0.3, 0.2, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001, 0.0000001};
+	
+	
+	// Training a Random Model For reference .. (Random Model.c File in Training Models
+	printf("\n\n ---------------- Training Random Models ---------------------- \n\n");
+	randomModel(y_train, 10000);
+	
+	// Linear Regression - Training Linear Regression model using Hyperparameter Tuning
+	double alpha[11] = {0.5, 0.4, 0.3, 0.2, 0.1, 0.01, 0.001, 0.0001, 0.00001};
 	printf("\n\n ---------------- Training Regression Models ---------------------- \n\n");
 	printf("------------- Multiple Regression-------------\n");
 	double *w_best;
 	double maxerr = 1e7;
 	int i,j;
 	printf("------------- HyperParameter Tuning--------------\n");
-	for(i = 0 ; i < 11 ; i++){
+	for(i = 0 ; i < 9 ; i++){
 		// Below functions are defined in Linear Regression.c file and trains the model, predicts values and calculates error
 		double *w = LinearRegression(X_train, y_train, alpha[i]);
 		double *y_pred = predict(X_train, w);
 		double *err = errors(y_train, y_pred);
 		double sum = 0;
 		for(j = 0 ; j < 10000 ; j++)
-			sum += err[j] * err[j];
+			sum += (err[j] * err[j]);
 		printf("Error for alpha %.7lf is : %.6lf\n", alpha[i], sum);	
 		if(sum <= maxerr){
 			maxerr = sum;
@@ -67,6 +73,7 @@ int main(){
 	printf("Feature Coefficient of Best Model :\n");
 	for(i = 1 ; i < 7 ; i++)
 		printf("Feature %d has coefficient :  %.6lf\n", i, w_best[i]);
-	return 0;
+		
+	
 	return 0;
 }
