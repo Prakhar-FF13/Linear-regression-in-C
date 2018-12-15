@@ -90,7 +90,8 @@ int main(){
 	printf("\n\n------------- Testing the Model on Test Dataset -------------------- \n\n");
 	displayTestResults(X_test, y_test, w_best, 5000);
 	printf("\n\n------------- Writing the model to file --------------------- \n\n");
-	writeToFile(w_best, fimin, fimax, 6);
+	writeToFile(w_best, fimin, fimax, 7);
+	printf("\nDone\n");
 	
 	return 0;
 }

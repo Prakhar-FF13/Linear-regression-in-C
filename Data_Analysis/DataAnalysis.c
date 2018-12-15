@@ -88,7 +88,7 @@ double **findAndRemoveOutliers(double **mat){
 	return newmat;
 }
 // Performs outlier removal and train-test split ...
-double fimin[6], fimax[6];
+double fimin[7], fimax[7];
 
 // Scaling the cdataset first..
 void MinMaxScaling(double **mat, int newlen){
@@ -98,6 +98,7 @@ void MinMaxScaling(double **mat, int newlen){
 		double x = minValue(mat, j);
 		double y = maxValue(mat, j);
 		fimin[j] = x; fimax[j] = y;
+		
 		for(i = 0 ;  i < newlen ; i++)
 			mat[i][j] = (mat[i][j] - x)*1.0/(y-x);
 	}

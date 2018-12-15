@@ -24,26 +24,28 @@ void displayTestResults(double **X_test, double *y_test, double *w, int test_siz
 }
 
 struct data{
-	double *w;
-	double *fimin;
-	double *fimax;
+	double w[7];
+	double fimin[7];
+	double fimax[7];
 	int size;
 };
 
 // Write the model to File.
 void writeToFile(double *w_best, double *fimin, double *fimax, int size){
 	FILE *fp;
-	fp = fopen("model_details.data", "wb");
+	fp = fopen("model_details.bin", "wb");
 	if(fp == NULL){
 		printf("\nCould not write to file..\n");
 		return;
 	}else{
 		struct data d;
-		d.w = w_best;
-		d.fimax = fimax;
-		d.fimin = fimin;
 		d.size = size;
-		
+		int i;
+		for(i = 0 ; i < size ; i++){
+			d.w[i] = w_best[i];
+			d.fimin[i] = fimin[i];
+			d.fimax[i] = fimax[i];
+		}
 		fwrite(&d, sizeof(struct data), 1, fp);
 	}
 	fclose(fp);
