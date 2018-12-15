@@ -13,6 +13,7 @@
 #include "Training_Models/RandomModel.c"
 #include "Training_Models/LinearRegression.c"
 #include "Training_Models/KNNRegression.c"
+#include "Test_Models_and_Write_to_File/test_model.c"
 
 int main(){
 	// Read Data (readfile.c).
@@ -83,11 +84,13 @@ int main(){
 	
 	
 	printf("\n\n------------- Conclusion of Model Training ------------------\n\n");
-	printf("The Linear egression Model PErforms the Best out of the ones tested, hence we will this one only..");
+	printf("The Linear egression Model Performs the Best out of the ones tested, hence we will this one only..");
 	
 	
 	printf("\n\n------------- Testing the Model on Test Dataset -------------------- \n\n");
-	
+	displayTestResults(X_test, y_test, w_best, 5000);
+	printf("\n\n------------- Writing the model to file --------------------- \n\n");
+	writeToFile(w_best, fimin, fimax, 6);
 	
 	return 0;
 }
