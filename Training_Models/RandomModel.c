@@ -28,5 +28,5 @@ void randomModel(double *y_train, int size){
 	printf("\nDone\n");
 	free(predictions);
 	free(errors);
-	printf("\nAverage Error of the Random Model was found to be : %lf\n", average_error);
+	printf("\nAverage Error of the Random Model was found to be : %lf\n", average_error/train_size);
 }

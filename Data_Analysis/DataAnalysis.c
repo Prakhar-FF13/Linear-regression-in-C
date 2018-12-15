@@ -90,6 +90,7 @@ double **findAndRemoveOutliers(double **mat){
 // Performs outlier removal and train-test split ...
 double fimin[6], fimax[6];
 
+// Scaling the cdataset first..
 void MinMaxScaling(double **mat, int newlen){
 	int i,j;
 	printf("\n-------------------------------\nMin-Max Scaling\n\n");

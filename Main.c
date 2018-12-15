@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include "Read_File/structure.c"
 #include "Read_File/helper.c"
 #include "Read_File/readfile.c"
@@ -11,6 +12,7 @@
 #include "Data_Analysis/DataAnalysis.c"
 #include "Training_Models/RandomModel.c"
 #include "Training_Models/LinearRegression.c"
+#include "Training_Models/KNNRegression.c"
 
 int main(){
 	// Read Data (readfile.c).
@@ -44,7 +46,7 @@ int main(){
 	
 	
 	// Training a Random Model For reference .. (Random Model.c File in Training Models
-	printf("\n\n ---------------- Training Random Models ---------------------- \n\n");
+	printf("\n\n ---------------- Training Random Model ---------------------- \n\n");
 	randomModel(y_train, 10000);
 	
 	// Linear Regression - Training Linear Regression model using Hyperparameter Tuning
@@ -54,7 +56,6 @@ int main(){
 	double *w_best;
 	double maxerr = 1e7;
 	int i,j;
-	printf("------------- HyperParameter Tuning--------------\n");
 	for(i = 0 ; i < 9 ; i++){
 		// Below functions are defined in Linear Regression.c file and trains the model, predicts values and calculates error
 		double *w = LinearRegression(X_train, y_train, alpha[i]);
@@ -74,6 +75,19 @@ int main(){
 	for(i = 1 ; i < 7 ; i++)
 		printf("Feature %d has coefficient :  %.6lf\n", i, w_best[i]);
 		
+	
+	
+	// Hyperparameter tuning for KNNRegression..
+	printf("\n\n------------- KNN Regression--------------\n");
+	KNNRegression(X_train, y_train, 10000);
+	
+	
+	printf("\n\n------------- Conclusion of Model Training ------------------\n\n");
+	printf("The Linear egression Model PErforms the Best out of the ones tested, hence we will this one only..");
+	
+	
+	printf("\n\n------------- Testing the Model on Test Dataset -------------------- \n\n");
+	
 	
 	return 0;
 }
